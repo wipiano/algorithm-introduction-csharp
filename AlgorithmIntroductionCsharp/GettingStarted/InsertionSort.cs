@@ -4,9 +4,12 @@ using Xunit;
 
 namespace AlgorithmIntroductionCsharp.GettingStarted
 {
+    /// <summary>
+    /// 挿入ソート
+    /// </summary>
     public class InsertionSort
     {
-        [Fact]
+        [Fact(DisplayName = "挿入ソート 昇順")]
         public void OrderIntSeqAsc()
         {
             var source = new[] {1, 5, 3, 0, 2, 1, 3};
@@ -15,7 +18,7 @@ namespace AlgorithmIntroductionCsharp.GettingStarted
             source.Is(new [] {0, 1, 1, 2, 3, 3, 5});
         }
         
-        [Fact]
+        [Fact(DisplayName = "挿入ソート 降順")]
         public void OrderIntSeqDesc()
         {
             var source = new[] {1, 5, 3, 0, 2, 1, 3};
@@ -56,14 +59,21 @@ namespace AlgorithmIntroductionCsharp.GettingStarted
 
             public void Sort()
             {
+                // 最初の要素は比較対象がないのでスキップして良い
                 for (_index = 1; _index < _sequence.Length; _index++)
                 {
+                    // target は一時的にコピーしておかないと， _sequence[_index] は書き換わる可能性がある
                     var target = _sequence[_index];
                     var insertAt = ShiftAndSearchIndex();
                     _sequence[insertAt] = target;
                 }
             }
 
+            /*
+             * 挿入場所を確保しつつ，挿入場所を探す
+             * 昇順の場合，今回挿入する要素と(同じ|小さくなる)直前の点を探し，そこを挿入場所とする
+             * 降順の場合，今回挿入する要素と(同じ|大きくなる)直前の点を探し，そこを挿入場所とする
+             */
             private int ShiftAndSearchIndex()
             {
                 var target = _sequence[_index];
