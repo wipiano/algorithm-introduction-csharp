@@ -51,12 +51,12 @@ namespace AlgorithmIntroductionCsharp.GettingStarted
                 _sequence = sequence;
                 _order = order;
                 _comparer = comparer;
-                _index = 1;
+                _index = default; // てきとうでよい
             }
 
             public void Sort()
             {
-                for (; _index < _sequence.Length; _index++)
+                for (_index = 1; _index < _sequence.Length; _index++)
                 {
                     var target = _sequence[_index];
                     var insertAt = ShiftAndSearchIndex();
